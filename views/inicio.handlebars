@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4e9e9; 
+        }
+        .container{
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 250px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        button{
+            background-color: 	#E0FFFF;
+            border: 0;
+            padding: 5px;
+        }
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
+        table{
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td{
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+    </style>
+    <title>Empresa</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <form action="/pesquisa" method="post">
+                <input type="search" name="pesquisa">
+                <select name="ordem">
+                    <option value="DESC">Maior Salário</option>
+                    <option value="ASC">Menor Salário</option>
+                </select>
+                <select name="departamento">
+                    <option value="0">Todos</option>
+                    <option value="1">Administrativo</option>
+                    <option value="2">Designer</option>
+                    <option value="3">Contábil</option>
+                    <option value="4">Fábrica</option>
+                </select>
+                <input type="submit" value="Pesquisar">
+            </form>
+        </header>
+        <br>
+        <div class="cadastro">
+            <form action="cadastrar" method="get">
+                <button type="submit">Cadastrar Empregado</button>
+            </form>
+        </div>
+        <br>
+        <div class="empregados">
+            <table>
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Nome</td>
+                        <td>Salário Bruto</td>
+                        <td>Salário Líquido</td>
+                        <td>Departamento</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                {{#each results_form}}
+                <tr>
+                    <td>{{ id }}</td>
+                    <td>{{ nome }}</td>
+                    <td>{{ salario_bruto }}</td>
+                    <td>{{ salario_liquido }}</td>
+                    <td>{{ departamento }}</td>
+                    <td><button><a href="/editar/{{id}}">Editar</a></button></td>
+                    <td><button><a href="/delete/{{id}}">Deletar</a></button></td>
+                </tr>
+                {{/each}}
+            </table>
+            <br>
+            Administrativos: {{administrativo}}
+            <br>
+            Designers: {{designer}}
+            <br>
+            Contábeis: {{contabil}}
+            <br>
+            Fabricadores: {{fabrica}}
+        </div>
+    </div>
+</body>
+</html>
